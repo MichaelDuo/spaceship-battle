@@ -1,3 +1,4 @@
-import Engine from "./engine/index"
+import Engine, { World } from "./engine"
 
-let engine = new Engine()
+let world = new World("game-container")
+let engine = new Engine(world)

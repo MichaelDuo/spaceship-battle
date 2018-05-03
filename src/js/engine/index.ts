@@ -1,14 +1,15 @@
+import World from './world'
+import { Manager } from './interfaces'
+
 class Engine {
-    private managers:manager[] = []
+    private world:World
+    private managers:Manager[] = []
 
-    constructor(){
-
+    constructor(world:World){
+        this.world = world
     }
 
-    /**
-     * addManager
-     */
-    public addManager(manager:manager) {
+    public addManager(manager:Manager) {
         this.managers.push(manager)
     }
 
@@ -24,14 +25,12 @@ class Engine {
     }
 
     private step(){
-        console.log("Step")
+        this.world.step()
+        this.managers.forEach(manager=>manager.step())
     }
 }
 
-interface manager {
-    step: ()=>void
-}
-
 export default Engine
-
-export * from "./object"
+export * from './object'
+export * from './interfaces'
+export { default as World } from './world'
