@@ -6,6 +6,10 @@ html, body {
     box-sizing: border-box;
 }
 
+.invisible {
+    visibility: hidden;
+}
+
 .game-field {
     position: absolute;
     overflow: hidden;
@@ -48,7 +52,7 @@ html, body {
 
 .missle {
     position: absolute;
-    width: 1px;
-    height: 10px;
+    width: 2px;
+    height: 15px;
     background-color: yellow;
 }

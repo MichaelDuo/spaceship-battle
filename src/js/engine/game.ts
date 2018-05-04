@@ -4,7 +4,9 @@ import { KeybordInputManager } from './keyboard-input-manager'
 export class Game {
     world:World
     keyboardInputManager:KeybordInputManager
+
     private managers:Manager[] = [ ]
+    private startTime:number
 
     constructor(world:World){
         this.world = world
@@ -19,7 +21,12 @@ export class Game {
     }
 
     public start(){
+        this.startTime = Date.now()
         this.loop()
+    }
+
+    public getTimeElapsed():number{
+        return Date.now() - this.startTime
     }
 
     private loop(){

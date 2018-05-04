@@ -23,9 +23,7 @@ export class Player extends Obj {
     }
 
     create(){
-        // el is added to the dom, create component
-        let missle = new Missle(1, this.getPosition(), {x: 0, y: -1})
-        this.game.world.addObject(missle)
+
     }
 
     destroy(){
@@ -58,13 +56,26 @@ export class Player extends Obj {
             this.top = worldHeight - playerHeight
         }
 
-        // let missle = new Missle(1, this.getPosition(), {x: 0, y: -1})
-        // this.game.world.addObject(missle)
-
-        // let missle = new Missle(15, this.getPosition(), {x: 0, y: -1})
-        // this.game.world.addObject(missle)
+        this.lauchMissle()
         
         this.render()
+    }
+
+    private lastMissleLaunchTime:number
+    lauchMissle(){
+        let timeGap = 200 //ms
+        let gameTime = this.game.getTimeElapsed()
+        if(gameTime-this.lastMissleLaunchTime>=timeGap || !this.lastMissleLaunchTime){
+            let leftPosition = this.getPosition()
+            let missleLeft = new Missle(10, leftPosition, {x: 0, y: -1})
+            this.game.world.addObject(missleLeft)
+
+            let rightPosition = Object.assign({}, leftPosition, { left: leftPosition.left + this.getWidth() })
+            let missleRight = new Missle(10, rightPosition, {x: 0, y: -1})
+            this.game.world.addObject(missleRight)
+
+            this.lastMissleLaunchTime = gameTime
+        }
     }
 
     render(){

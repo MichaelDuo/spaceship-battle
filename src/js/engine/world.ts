@@ -24,10 +24,26 @@ export class World extends Obj implements Manager {
     public addObject(object:Obj){
         object.setup(this.game)
         if(object.el){
+            object.el.addClass("invisible")
             this.el.append(object.el)
         }
         this.objects.push(object)
         object.create()
+        object.step && object.step()
+        object.el.removeClass("invisible")
+    }
+
+    public removeObject(object:Obj){
+        this.objects.splice(this.objects.indexOf(object), 1)
+        object.el.remove()
+        object.destroy()
+    }
+
+    public inBound(rect: {top:number, left:number, width:number, height:number}){
+        return rect.top >= 0
+            && rect.left >= 0
+            && rect.top + rect.height <= this.getHeight()
+            && rect.left + rect.width <= this.getWidth()
     }
 
     private createWorldEl(){
@@ -36,7 +52,7 @@ export class World extends Obj implements Manager {
     }
 
     private createBackground(){
-        this.addObject(new StarField(5))
-        this.addObject(new StarField(10))
+        this.addObject(new StarField(2))
+        this.addObject(new StarField(3))
     }
 }

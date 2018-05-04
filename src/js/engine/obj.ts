@@ -33,4 +33,8 @@ export class Obj {
     public step(){
         // Implement in subclasses
     }
+
+    public destroy(){
+        // Implement in subclasses
+    }
 }
