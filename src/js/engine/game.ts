@@ -1,12 +1,12 @@
 import { World } from './world'
 import { Manager } from './interfaces'
-
 export class Game {
-    private world:World
-    private managers:Manager[] = []
+    world:World
+    private managers:Manager[] = [ ]
 
     constructor(world:World){
         this.world = world
+        world.game = this
         this.addManager(world)
     }
 

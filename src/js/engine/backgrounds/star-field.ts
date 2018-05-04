@@ -1,30 +1,27 @@
 import { Obj } from '../obj'
+import { Game } from '../game'
 export default class StarField extends Obj {
     stop:boolean = false
-    el:JQuery
+    el:JQuery = $('<div class="starfield-container"></div>')
 
-    private container:JQuery
     private speed:number
     private starField1:JQuery
     private starField2:JQuery
 
-    constructor(container:JQuery, speed:number){
+    constructor(speed:number){
         super()
-
-        this.container = container
         this.speed = speed
+    }
 
-        let el = this.el = $('<div class="starfield-container"></div>')
-        container.append(el)
-
+    create(){
         let s1 = this.starField1 = $('<div class="starfield"></div>')
         let s2 = this.starField2 = $('<div class="starfield"></div>')
 
-        s1.css({top: "-" + el.height() + "px"})
+        s1.css({top: "-" + this.el.height() + "px"})
         s2.css({top: "0px"})
 
-        el.append(s1)
-        el.append(s2)
+        this.el.append(s1)
+        this.el.append(s2)
 
         this.randomStars(s1)
         this.randomStars(s2)
@@ -36,7 +33,7 @@ export default class StarField extends Obj {
         }
         var s1Top = this.starField1.position().top + this.speed
         var s1Height = this.starField1.height()
-        var containerHeight = this.container.height()
+        var containerHeight = this.el.height()
 
         if(s1Top>=containerHeight){
             this.starField1.css({top: "-" + containerHeight+ "px"})

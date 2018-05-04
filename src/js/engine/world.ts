@@ -1,8 +1,10 @@
 import StarField from './backgrounds/star-field'
 import { Obj } from './obj'
 import { Manager } from './interfaces'
+import { Game } from './game'
 export class World implements Manager {
     el:JQuery<HTMLElement>
+    game:Game
 
     private objects:Obj[] = [ ]
 
@@ -19,7 +21,12 @@ export class World implements Manager {
     }
 
     public addObject(object:Obj){
+        object.setup(this.game)
+        if(object.el){
+            this.el.append(object.el)
+        }
         this.objects.push(object)
+        object.create()
     }
 
     private createWorldEl(){
@@ -28,7 +35,7 @@ export class World implements Manager {
     }
 
     private createBackground(){
-        this.addObject(new StarField(this.el, 5))
-        this.addObject(new StarField(this.el, 10))
+        this.addObject(new StarField(5))
+        this.addObject(new StarField(10))
     }
 }

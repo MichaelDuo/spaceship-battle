@@ -1,3 +1,4 @@
+import { Game } from './game'
 export class Obj {
 
     public el:JQuery<HTMLElement>
@@ -22,6 +23,15 @@ export class Obj {
     // Position inside parent element
     public position():{ top: number, left: number } {
         return this.el.position()
+    }
+
+    public setup(game:Game){
+        // Implement in subclasses
+        // called before insert to DOM
+    }
+
+    public create(){
+        // called after insert dom
     }
 
     public step(){
