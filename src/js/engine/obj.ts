@@ -1,4 +1,4 @@
-export default class Object {
+export class Obj {
 
     public el:JQuery<HTMLElement>
     
@@ -22,5 +22,9 @@ export default class Object {
     // Position inside parent element
     public position():{ top: number, left: number } {
         return this.el.position()
+    }
+
+    public step(){
+        // Implement in subclasses
     }
 }

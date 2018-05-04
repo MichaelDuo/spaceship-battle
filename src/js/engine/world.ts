@@ -1,5 +1,10 @@
-export default class World {
+import StarField from './backgrounds/star-field'
+import { Obj } from './obj'
+import { Manager } from './interfaces'
+export class World implements Manager {
     el:JQuery<HTMLElement>
+
+    private objects:Obj[] = [ ]
 
     private containerSelector:string
 
@@ -9,16 +14,21 @@ export default class World {
         this.createBackground()
     }
 
+    public step(){
+        this.objects.forEach(obj=>obj.step())
+    }
+
+    public addObject(object:Obj){
+        this.objects.push(object)
+    }
+
     private createWorldEl(){
         var el = this.el = $('<div class="game-field"></div>')
         $(this.containerSelector).append(el)
     }
 
     private createBackground(){
-        
-    }
-
-    public step(){
-        console.log("World Step")
+        this.addObject(new StarField(this.el, 5))
+        this.addObject(new StarField(this.el, 10))
     }
 }
