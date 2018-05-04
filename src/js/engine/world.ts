@@ -2,7 +2,7 @@ import StarField from './backgrounds/star-field'
 import { Obj } from './obj'
 import { Manager } from './interfaces'
 import { Game } from './game'
-export class World implements Manager {
+export class World extends Obj implements Manager {
     el:JQuery<HTMLElement>
     game:Game
 
@@ -11,13 +11,14 @@ export class World implements Manager {
     private containerSelector:string
 
     constructor(containerId?:string){
+        super()
         this.containerSelector = containerId ? "#" + containerId : "body"
         this.createWorldEl()
         this.createBackground()
     }
 
     public step(){
-        this.objects.forEach(obj=>obj.step())
+        this.objects.forEach(obj=>obj.step && obj.step())
     }
 
     public addObject(object:Obj){

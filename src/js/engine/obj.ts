@@ -3,26 +3,21 @@ export class Obj {
 
     public el:JQuery<HTMLElement>
     
-    // Position relative to the view port
-    public top():number {
-        return this.el.offset().top
-    }
-
-    public left():number {
-        return this.el.offset().left
-    }
-
-    public width():number {
-        return this.el.width()
-    }
-
-    public height():number {
-        return this.el.height()
+    public getOffset():JQuery.Coordinates | undefined{
+        return this.el.offset()
     }
 
     // Position inside parent element
-    public position():{ top: number, left: number } {
+    public getPosition():{ top: number, left: number } {
         return this.el.position()
+    }
+
+    public getWidth():number {
+        return this.el.width()
+    }
+
+    public getHeight():number {
+        return this.el.height()
     }
 
     public setup(game:Game){
