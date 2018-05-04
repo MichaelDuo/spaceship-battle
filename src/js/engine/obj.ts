@@ -2,6 +2,7 @@ import { Game } from './game'
 export class Obj {
 
     public el:JQuery<HTMLElement>
+    public tag:string = ""
     
     public getOffset():JQuery.Coordinates | undefined{
         return this.el.offset()

@@ -1,9 +1,11 @@
 import { Obj, Game, Utils } from "../engine"
+import { Missle } from "./missle"
 
 export class Player extends Obj {
     el:JQuery = $('<div class="object player"></div>')
     game:Game
 
+    tag = "player"
     speed:number = 0
     
     top:number = 0
@@ -22,6 +24,8 @@ export class Player extends Obj {
 
     create(){
         // el is added to the dom, create component
+        let missle = new Missle(1, this.getPosition(), {x: 0, y: -1})
+        this.game.world.addObject(missle)
     }
 
     destroy(){
@@ -53,6 +57,13 @@ export class Player extends Obj {
         if(this.top + playerHeight > worldHeight){
             this.top = worldHeight - playerHeight
         }
+
+        // let missle = new Missle(1, this.getPosition(), {x: 0, y: -1})
+        // this.game.world.addObject(missle)
+
+        // let missle = new Missle(15, this.getPosition(), {x: 0, y: -1})
+        // this.game.world.addObject(missle)
+        
         this.render()
     }
 

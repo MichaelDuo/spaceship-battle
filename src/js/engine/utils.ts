@@ -1,5 +1,9 @@
+export interface Vector {
+    x: number
+    y: number
+}
 export class Utils {
-    static getVector(direction:string){
+    static getVector(direction:string):Vector{
         switch(direction){
             case "up":
                 return { x: 0, y: -1 }
