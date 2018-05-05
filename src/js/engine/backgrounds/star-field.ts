@@ -53,7 +53,7 @@ export default class StarField extends Obj {
         let width = starField.width()
         let height = starField.height()
         starField.empty()
-        let count = Math.floor(50 + Math.random() * 30)
+        let count = Math.floor(10 + Math.random() * 10)
         let star
         while(count>0){
             star = $('<div class="star"></div>')

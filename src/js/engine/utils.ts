@@ -1,7 +1,5 @@
-export interface Vector {
-    x: number
-    y: number
-}
+import { Vector } from './interfaces'
+
 export class Utils {
     static getVector(direction:string):Vector{
         switch(direction){

@@ -64,7 +64,7 @@ export class Player extends Obj {
     private lastMissleLaunchTime:number
     lauchMissle(){
         let timeGap = 200 //ms
-        let gameTime = this.game.getTimeElapsed()
+        let gameTime = this.game.getGameTime()
         if(gameTime-this.lastMissleLaunchTime>=timeGap || !this.lastMissleLaunchTime){
             let leftPosition = this.getPosition()
             let missleLeft = new Missle(10, leftPosition, {x: 0, y: -1})

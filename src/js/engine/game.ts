@@ -25,7 +25,7 @@ export class Game {
         this.loop()
     }
 
-    public getTimeElapsed():number{
+    public getGameTime():number{
         return Date.now() - this.startTime
     }
 

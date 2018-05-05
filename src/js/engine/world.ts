@@ -17,6 +17,11 @@ export class World extends Obj implements Manager {
         this.createBackground()
     }
 
+    private lastEnemeyCreatedTime:number
+    private createEnemyRoutine(){
+        // if
+    }
+
     public step(){
         this.objects.forEach(obj=>obj.step && obj.step())
     }

@@ -39,9 +39,14 @@ html, body {
 }
 
 .player {
+    $playerWidth: 60px;
+    $playerHeight: 50px;
+
     background-color: white;
-    width: 50px;
-    height: 50px;
+    width: $playerWidth;
+    height: $playerHeight;
+    background: url("../img/player-ship.png") no-repeat;
+    background-size: $playerWidth $playerHeight;
 }
 
 .starfield-container {
@@ -53,6 +58,13 @@ html, body {
 .missle {
     position: absolute;
     width: 2px;
-    height: 15px;
+    height: 18px;
     background-color: yellow;
+    transform: translateX(-50%);
+}
+
+.enemy {
+    width: 80px;
+    height: 50px;
+    background-color: red;
 }
