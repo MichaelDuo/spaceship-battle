@@ -27,6 +27,23 @@ export default class StarField extends Obj {
         this.randomStars(s2)
     }
 
+    private randomStars(starField:JQuery){
+        let width = starField.width()
+        let height = starField.height()
+        starField.empty()
+        let count = Math.floor(10 + Math.random() * 10)
+        let star
+        while(count>0){
+            star = $('<div class="star"></div>')
+            star.css({
+                top: Math.floor(Math.random() * height),
+                left: Math.floor(Math.random() * width)
+            })
+            starField.append(star)
+            count--
+        }
+    }
+
     step(){
         if(this.stop) { 
             return 
@@ -46,23 +63,6 @@ export default class StarField extends Obj {
             this.starField2.css({top: (s1Top + s1Height)+"px"})
         } else {
             this.starField2.css({top: (s1Top - s1Height)+"px"})
-        }
-    }
-
-    private randomStars(starField:JQuery){
-        let width = starField.width()
-        let height = starField.height()
-        starField.empty()
-        let count = Math.floor(10 + Math.random() * 10)
-        let star
-        while(count>0){
-            star = $('<div class="star"></div>')
-            star.css({
-                top: Math.floor(Math.random() * height),
-                left: Math.floor(Math.random() * width)
-            })
-            starField.append(star)
-            count--
         }
     }
 }

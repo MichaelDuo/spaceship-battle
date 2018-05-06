@@ -1,8 +1,13 @@
 import { Game } from './game'
 export class Obj {
 
-    public el:JQuery<HTMLElement>
-    public tag:string = ""
+    el:JQuery<HTMLElement>
+    tag:string = ""
+
+    top:number = 0
+    right:number = 0
+    width:number = 0
+    height:number = 0
     
     public getOffset():JQuery.Coordinates | undefined{
         return this.el.offset()
@@ -36,5 +41,9 @@ export class Obj {
 
     public destroy(){
         // Implement in subclasses
+    }
+
+    public draw(ctx:CanvasRenderingContext2D){
+        
     }
 }
