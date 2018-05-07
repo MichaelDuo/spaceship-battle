@@ -13,10 +13,10 @@ export class World extends Obj implements Manager {
 
     constructor(canvasId?:string){
         super()
-        this.setupCanvas(canvasId)
-        this.createBackground()
         this.width = $(window).width()
         this.height = $(window).height()
+        this.setupCanvas(canvasId)
+        this.createBackground()
     }
 
     private setupCanvas(canvasId?:string){

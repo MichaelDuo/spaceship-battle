@@ -13,6 +13,10 @@ export default class StarField extends Obj {
         this.speed = speed
     }
 
+    setup(game:Game){
+        
+    }
+
     create(){
         let s1 = this.starField1 = $('<div class="starfield"></div>')
         let s2 = this.starField2 = $('<div class="starfield"></div>')
