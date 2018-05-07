@@ -6,38 +6,44 @@ export class World extends Obj implements Manager {
     game:Game
     canvas:HTMLCanvasElement
     ctx:CanvasRenderingContext2D
+    width:number
+    height:number
 
     private objects:Obj[] = [ ]
 
     constructor(canvasId?:string){
         super()
+        this.setupCanvas(canvasId)
+        this.createBackground()
+        this.width = $(window).width()
+        this.height = $(window).height()
+    }
+
+    private setupCanvas(canvasId?:string){
         let canvas = this.canvas = <HTMLCanvasElement>document.getElementById(canvasId)
         this.ctx = canvas.getContext("2d")
-        $(canvas).attr({ width: $(window).width(), height: $(window).height()})
+        $(canvas).attr({ width: this.width, height: this.height})
     }
 
     public step(){
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
-        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
-        // this.objects.forEach(obj=>obj.step && obj.step())
+        this.objects.forEach(obj=>{
+            obj.step()
+            obj.draw(this.ctx)
+        })
     }
 
     public addObject(object:Obj){
-        // object.setup(this.game)
-        // if(object.el){
-        //     object.el.addClass("invisible")
-        //     this.el.append(object.el)
-        // }
-        // this.objects.push(object)
-        // object.create()
-        // object.step && object.step()
-        // object.el.removeClass("invisible")
+        object.setup(this.game)
+        this.objects.push(object)
+        object.create()
+        object.step()
+        object.draw(this.ctx)
     }
 
     public removeObject(object:Obj){
-        // this.objects.splice(this.objects.indexOf(object), 1)
-        // object.el.remove()
-        // object.destroy()
+        this.objects.splice(this.objects.indexOf(object), 1)
+        object.destroy()
     }
 
     public inBound(rect: {top:number, left:number, width:number, height:number}){
@@ -48,7 +54,7 @@ export class World extends Obj implements Manager {
     }
 
     private createBackground(){
-        // this.addObject(new StarField(2))
-        // this.addObject(new StarField(3))
+        this.addObject(new StarField(2))
+        this.addObject(new StarField(3))
     }
 }

@@ -45,24 +45,29 @@ export default class StarField extends Obj {
     }
 
     step(){
-        if(this.stop) { 
-            return 
-        }
-        var s1Top = this.starField1.position().top + this.speed
-        var s1Height = this.starField1.height()
-        var containerHeight = this.el.height()
+        // console.log("Step Star")
+        // if(this.stop) { 
+        //     return 
+        // }
+        // var s1Top = this.starField1.position().top + this.speed
+        // var s1Height = this.starField1.height()
+        // var containerHeight = this.el.height()
 
-        if(s1Top>=containerHeight){
-            this.starField1.css({top: "-" + containerHeight+ "px"})
-            s1Top = -containerHeight
-        } else {
-            this.starField1.css({top: (s1Top )+"px"})
-        }
+        // if(s1Top>=containerHeight){
+        //     this.starField1.css({top: "-" + containerHeight+ "px"})
+        //     s1Top = -containerHeight
+        // } else {
+        //     this.starField1.css({top: (s1Top )+"px"})
+        // }
 
-        if(s1Top < 0) {
-            this.starField2.css({top: (s1Top + s1Height)+"px"})
-        } else {
-            this.starField2.css({top: (s1Top - s1Height)+"px"})
-        }
+        // if(s1Top < 0) {
+        //     this.starField2.css({top: (s1Top + s1Height)+"px"})
+        // } else {
+        //     this.starField2.css({top: (s1Top - s1Height)+"px"})
+        // }
+    }
+
+    draw(ctx:CanvasRenderingContext2D){
+        ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height)
     }
 }
