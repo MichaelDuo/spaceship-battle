@@ -9,10 +9,12 @@ export default class StarField extends Sprite {
     private numStars:number = 100
     private starfield:HTMLCanvasElement
     private game:Game
+    private transparentBackground:boolean
 
-    constructor(speed:number){
+    constructor(speed:number, transparentBackground=false){
         super()
         this.speed = speed
+        this.transparentBackground = transparentBackground
     }
 
     setup(game:Game){
@@ -23,8 +25,12 @@ export default class StarField extends Sprite {
         let starfieldCtx = starfield.getContext("2d")
         
         starfieldCtx.fillStyle = "#000"
+        if(this.transparentBackground){
+            starfieldCtx.globalAlpha = 0
+        }
         starfieldCtx.fillRect(0,0,game.world.width,game.world.height)
-        
+        starfieldCtx.globalAlpha = 1
+
         starfieldCtx.fillStyle = "white"
         for(var i=0; i<this.numStars; i++){
             starfieldCtx.fillRect(

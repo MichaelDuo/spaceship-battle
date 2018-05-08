@@ -55,7 +55,8 @@ export class World extends Sprite implements Manager {
     }
 
     private createBackground(){
-        this.addObject(new StarField(2))
-        // this.addObject(new StarField(3))
+        this.addObject(new StarField(1))
+        this.addObject(new StarField(2, true))
+        this.addObject(new StarField(3, true))
     }
 }
