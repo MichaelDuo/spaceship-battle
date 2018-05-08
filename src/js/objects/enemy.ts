@@ -21,8 +21,6 @@ export class Enemy extends Sprite {
         this.game = game
     }
 
-    create(){}
-
     destroy(){}
 
     step(){

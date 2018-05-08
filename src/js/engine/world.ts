@@ -13,9 +13,13 @@ export class World extends Sprite implements Manager {
 
     constructor(canvasId?:string){
         super()
-        this.width = $(window).width()
-        this.height = $(window).height()
+        this.width = $(document).width()
+        this.height = $(document).height()
         this.setupCanvas(canvasId)
+    }
+    
+    setup(game:Game){
+        this.game = game
         this.createBackground()
     }
 
@@ -34,11 +38,8 @@ export class World extends Sprite implements Manager {
     }
 
     public addObject(object:Sprite){
-        object.setup(this.game)
         this.objects.push(object)
-        object.create()
-        object.step()
-        object.draw(this.ctx)
+        object.setup(this.game)
     }
 
     public removeObject(object:Sprite){
@@ -55,6 +56,6 @@ export class World extends Sprite implements Manager {
 
     private createBackground(){
         this.addObject(new StarField(2))
-        this.addObject(new StarField(3))
+        // this.addObject(new StarField(3))
     }
 }

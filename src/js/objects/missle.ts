@@ -16,7 +16,7 @@ export class Missle extends Sprite {
         super()
         this.speed = speed
         this.top = position.top
-        this.left = position.left
+        this.left = position.left - this.width/2
         this.vector = vector
     }
 
@@ -37,6 +37,5 @@ export class Missle extends Sprite {
         }
     }
 
-    destroy(){
-    }
+    destroy(){ }
 }

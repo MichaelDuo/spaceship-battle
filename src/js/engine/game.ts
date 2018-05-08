@@ -14,7 +14,6 @@ export class Game {
 
     constructor(world:World){
         this.world = world
-        world.game = this
         this.addManager(world)
         this.keyboardInputManager = new KeybordInputManager()
     }

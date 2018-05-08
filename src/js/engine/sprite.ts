@@ -39,10 +39,6 @@ export class Sprite {
         }
     }
 
-    public create(){
-        // called after insert dom
-    }
-
     public step(){
         // Implement in subclasses
     }

@@ -23,15 +23,8 @@ export class Player extends Sprite {
     setup(game:Game){
         super.setup(game)
         this.game = game
-    }
-
-    create(){
-
-    }
-
-    destroy(){
-        // el is removed from dom
-        // Destroy
+        this.top = this.game.world.height - this.height - 10
+        this.left = (this.game.world.width/2) - (this.width / 2)
     }
 
     step(){
