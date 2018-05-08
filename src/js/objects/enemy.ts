@@ -1,6 +1,6 @@
-import { Obj, Game, Utils, Position, Vector } from "../engine"
+import { Sprite, Game, Utils, Position, Vector } from "../engine"
 import { Missle } from "./missle"
-export class Enemy extends Obj {
+export class Enemy extends Sprite {
    el:JQuery = $('<div class="object enemy"></div>')
    game:Game
 

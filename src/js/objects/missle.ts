@@ -1,13 +1,15 @@
-import { Obj, Game, Utils, Vector } from "../engine"
+import { Sprite, Game, Utils, Vector } from "../engine"
 
-export class Missle extends Obj {
-    el = $('<div class="missle"></div>')
+export class Missle extends Sprite {
     tag = "missle"
-    speed = 15
+    speed = 30
     game:Game
 
     top = 0
     left = 0
+    width = 3
+    height = 15
+    backgroundColor = "yellow"
     vector:Vector
 
     constructor(speed:number, position:{top: number, left: number}, vector:Vector){
@@ -28,20 +30,13 @@ export class Missle extends Obj {
         if(!this.game.world.inBound({
             top: this.top,
             left: this.left,
-            width: this.getWidth(),
-            height: this.getHeight()
+            width: this.width,
+            height: this.height
         })){
-            console.log("Out of bounds")
             this.game.world.removeObject(this)
         }
-        this.render()
     }
 
     destroy(){
-        console.log("Missle on destroy")
-    }
-
-    render(){
-        this.el.css({ top: this.top, left: this.left })
     }
 }

@@ -1,15 +1,15 @@
 import StarField from './backgrounds/star-field'
-import { Obj } from './obj'
+import { Sprite } from './sprite'
 import { Manager } from './interfaces'
 import { Game } from './game'
-export class World extends Obj implements Manager {
+export class World extends Sprite implements Manager {
     game:Game
     canvas:HTMLCanvasElement
     ctx:CanvasRenderingContext2D
     width:number
     height:number
 
-    private objects:Obj[] = [ ]
+    private objects:Sprite[] = [ ]
 
     constructor(canvasId?:string){
         super()
@@ -33,7 +33,7 @@ export class World extends Obj implements Manager {
         })
     }
 
-    public addObject(object:Obj){
+    public addObject(object:Sprite){
         object.setup(this.game)
         this.objects.push(object)
         object.create()
@@ -41,7 +41,7 @@ export class World extends Obj implements Manager {
         object.draw(this.ctx)
     }
 
-    public removeObject(object:Obj){
+    public removeObject(object:Sprite){
         this.objects.splice(this.objects.indexOf(object), 1)
         object.destroy()
     }

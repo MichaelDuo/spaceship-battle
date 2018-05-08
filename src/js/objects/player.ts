@@ -1,24 +1,27 @@
-import { Obj, Game, Utils } from "../engine"
+import { Sprite, Game, Utils } from "../engine"
 import { Missle } from "./missle"
+import PlayerImage from '../../img/player-ship.png'
 
-export class Player extends Obj {
+export class Player extends Sprite {
     el:JQuery = $('<div class="object player"></div>')
     game:Game
 
     tag = "player"
-    speed:number = 0
+    speed = 0
     
-    top:number = 0
-    left:number = 0
+    top = 0
+    left = 0
+    width = 50
+    height = 50
+    backgroundImage = PlayerImage
 
     constructor(speed:number){
         super()
         this.speed = speed
-        // Set parameters
     }
 
     setup(game:Game){
-        // Set Environment
+        super.setup(game)
         this.game = game
     }
 
@@ -36,7 +39,8 @@ export class Player extends Obj {
         let vector = Utils.getVector(direction)
         this.left = this.left + vector.x * this.speed
         this.top = this.top + vector.y * this.speed
-        // Bounded option?
+
+        // Bounded option
         if(this.left < 0){
             this.left = 0
         }
@@ -44,10 +48,10 @@ export class Player extends Obj {
             this.top = 0
         }
         
-        let playerWidth = this.getWidth()
-        let playerHeight = this.getHeight()
-        let worldWidth = this.game.world.getWidth()
-        let worldHeight = this.game.world.getHeight()
+        let playerWidth = this.width
+        let playerHeight = this.height
+        let worldWidth = this.game.world.width
+        let worldHeight = this.game.world.height
 
         if(this.left + playerWidth > worldWidth){
             this.left = worldWidth - playerWidth
@@ -57,21 +61,19 @@ export class Player extends Obj {
         }
 
         this.lauchMissle()
-        
-        this.render()
     }
 
     private lastMissleLaunchTime:number
+    private missleTimeGap = 200 //ms
     lauchMissle(){
-        let timeGap = 200 //ms
         let gameTime = this.game.getGameTime()
-        if(gameTime-this.lastMissleLaunchTime>=timeGap || !this.lastMissleLaunchTime){
+        if(gameTime-this.lastMissleLaunchTime>=this.missleTimeGap || !this.lastMissleLaunchTime){
             let leftPosition = this.getPosition()
-            let missleLeft = new Missle(10, leftPosition, {x: 0, y: -1})
+            let missleLeft = new Missle(15, leftPosition, {x: 0, y: -1})
             this.game.world.addObject(missleLeft)
 
             let rightPosition = Object.assign({}, leftPosition, { left: leftPosition.left + this.getWidth() })
-            let missleRight = new Missle(10, rightPosition, {x: 0, y: -1})
+            let missleRight = new Missle(15, rightPosition, {x: 0, y: -1})
             this.game.world.addObject(missleRight)
 
             this.lastMissleLaunchTime = gameTime

@@ -5,8 +5,8 @@ export class GameManager implements Manager {
 
     setup(game: Game){
         this.game = game
-        let player = new Player(5)
-        // this.game.world.addObject(player)
+        let player = new Player(10)
+        this.game.world.addObject(player)
     }
 
     step(){

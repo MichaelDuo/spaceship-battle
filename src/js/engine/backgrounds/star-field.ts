@@ -1,6 +1,6 @@
-import { Obj } from '../obj'
+import { Sprite } from '../sprite'
 import { Game } from '../game'
-export default class StarField extends Obj {
+export default class StarField extends Sprite {
     stop:boolean = false
     el:JQuery = $('<div class="starfield-container"></div>')
 

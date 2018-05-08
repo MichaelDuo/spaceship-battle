@@ -1,5 +1,5 @@
 export * from './interfaces'
-export * from './obj'
+export * from './sprite'
 export * from './world'
 export * from './game'
 export * from './utils'
