@@ -30,12 +30,7 @@ export class Enemy extends Sprite {
     step(){
         this.left += this.vector.x * this.speed
         this.top += this.vector.y * this.speed
-        if(!this.game.world.inBound({
-            top: this.top,
-            left: this.left,
-            width: this.width,
-            height: this.height
-        })){
+        if(!this.game.world.inBound(this.getBoundingRect())){
             this.game.world.removeObject(this)
         }
     }

@@ -17,6 +17,15 @@ export class Sprite {
         }
     }
 
+    public getBoundingRect():{left: number, top: number, width:number, height:number}{
+        return {
+            left: this.left,
+            top: this.top,
+            width: this.width,
+            height: this.height
+        }
+    }
+
     public getWidth():number {
         return this.width
     }

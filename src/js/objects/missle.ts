@@ -27,12 +27,7 @@ export class Missle extends Sprite {
     step(){
         this.left += this.speed * this.vector.x
         this.top += this.speed * this.vector.y
-        if(!this.game.world.inBound({
-            top: this.top,
-            left: this.left,
-            width: this.width,
-            height: this.height
-        })){
+        if(!this.game.world.inBound(this.getBoundingRect())){
             this.game.world.removeObject(this)
         }
     }

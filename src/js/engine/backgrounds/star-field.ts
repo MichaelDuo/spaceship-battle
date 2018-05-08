@@ -25,7 +25,7 @@ export default class StarField extends Sprite {
         if(this.transparentBackground){
             starfieldCtx.globalAlpha = 0
         }
-        starfieldCtx.fillRect(0,0,game.world.width,game.world.height)
+        starfieldCtx.fillRect(0,0,game.world.width, game.world.height)
         starfieldCtx.globalAlpha = 1
 
         starfieldCtx.fillStyle = "white"
@@ -43,12 +43,12 @@ export default class StarField extends Sprite {
     step(){
         this.offset += this.speed
         if(this.offset>=this.game.world.height){
-            this.offset = 0
+            this.offset = 1 // Safari will throw error if reset to 0
         }
     }
 
     draw(ctx:CanvasRenderingContext2D){
-        ctx.drawImage(this.starfield, 0, this.starfield.height-this.offset, this.starfield.width, this.offset, 0, 0, this.game.world.width, this.offset)
-        ctx.drawImage(this.starfield, 0, 0, this.starfield.width, this.starfield.height-this.offset, 0, this.offset, this.game.world.width, this.game.world.height-this.offset)
+        ctx.drawImage(this.starfield, 0, this.starfield.height-this.offset, this.starfield.width, this.offset, 0, 0, this.starfield.width, this.offset)
+        ctx.drawImage(this.starfield, 0, 0, this.starfield.width, this.starfield.height-this.offset, 0, this.offset, this.starfield.width, this.starfield.height-this.offset)
     }
 }
