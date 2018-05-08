@@ -1,15 +1,17 @@
 import { Sprite, Game, Utils, Position, Vector } from "../engine"
 import { Missle } from "./missle"
 export class Enemy extends Sprite {
-   el:JQuery = $('<div class="object enemy"></div>')
    game:Game
 
    tag = "ememy"
    speed:number = 1
-   vector:Vector = { x: 0, y: -1 }
+   vector:Vector = { x: 0, y: 1 }
 
-   top:number = 0
-   left:number = 0
+   top = 0
+   left = 0
+   width = 50
+   height = 50
+   backgroundColor = "white"
 
     constructor(position: Position){
         super()
@@ -21,10 +23,20 @@ export class Enemy extends Sprite {
         this.game = game
     }
 
-    destroy(){}
+    destroy(){
+        console.log("emeny destroyed")
+    }
 
     step(){
         this.left += this.vector.x * this.speed
         this.top += this.vector.y * this.speed
+        if(!this.game.world.inBound({
+            top: this.top,
+            left: this.left,
+            width: this.width,
+            height: this.height
+        })){
+            this.game.world.removeObject(this)
+        }
     }
 }

@@ -48,10 +48,10 @@ export class World extends Sprite implements Manager {
     }
 
     public inBound(rect: {top:number, left:number, width:number, height:number}){
-        return rect.top >= 0
-            && rect.left >= 0
-            && rect.top + rect.height <= this.getHeight()
-            && rect.left + rect.width <= this.getWidth()
+        return rect.top + rect.height >= 0
+            && rect.left + rect.width >= 0
+            && rect.top <= this.getHeight()
+            && rect.left <= this.getWidth()
     }
 
     private createBackground(){

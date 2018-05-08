@@ -1,9 +1,6 @@
 import { Game } from './game'
 export class Sprite {
-
-    el:JQuery<HTMLElement>
     tag:string = ""
-
     left:number = 0
     top:number = 0
     width:number = 0
@@ -11,10 +8,6 @@ export class Sprite {
     backgroundColor:string = 'rgba(0,0,0,0)'
     backgroundImage:string = ''
     private backgroundImageEl?:HTMLImageElement = null
-    
-    public getOffset():JQuery.Coordinates | undefined{
-        return this.el.offset()
-    }
 
     // Position inside parent element
     public getPosition():{ top: number, left: number } {

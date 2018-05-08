@@ -3,7 +3,6 @@ import { Missle } from "./missle"
 import PlayerImage from '../../img/player-ship.png'
 
 export class Player extends Sprite {
-    el:JQuery = $('<div class="object player"></div>')
     game:Game
 
     tag = "player"
@@ -71,9 +70,5 @@ export class Player extends Sprite {
 
             this.lastMissleLaunchTime = gameTime
         }
-    }
-
-    render(){
-        this.el.css({ top: this.top, left: this.left })
     }
 }

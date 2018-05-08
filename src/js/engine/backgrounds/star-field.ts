@@ -1,9 +1,6 @@
 import { Sprite } from '../sprite'
 import { Game } from '../game'
-export default class StarField extends Sprite {
-    stop:boolean = false
-    el:JQuery = $('<div class="starfield-container"></div>')
-
+export default class StarField extends Sprite {    
     private speed:number
     private offset:number = 0
     private numStars:number = 100
