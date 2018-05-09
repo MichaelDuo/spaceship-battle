@@ -4,7 +4,7 @@ export class Enemy extends Sprite {
    game:Game
 
    tag = "ememy"
-   speed:number = 1
+   speed:number = 10
    vector:Vector = { x: 0, y: 1 }
 
    top = 0
