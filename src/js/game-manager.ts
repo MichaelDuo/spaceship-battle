@@ -1,9 +1,9 @@
-import { Game, Manager, IntervalManager } from './engine'
+import { Game, Manager, Timer } from './engine'
 import { Player } from './objects/player'
 import { Enemy } from './objects/enemy'
 export class GameManager implements Manager {
     game:Game
-    intervalManager:IntervalManager
+    timer:Timer
 
     player:Player
 
@@ -11,9 +11,9 @@ export class GameManager implements Manager {
         this.game = game
         let player = this.player = new Player(7)
         this.game.world.addSprite(player)
-        this.intervalManager = new IntervalManager(game)
+        this.timer = new Timer(game)
 
-        this.intervalManager.register(1000, ()=>{
+        this.timer.setInterval(1000, ()=>{
             this.generateEnemy()
         })
     }
@@ -25,7 +25,6 @@ export class GameManager implements Manager {
     }
 
     step(){
-        // this.generateEnemy()
-        this.intervalManager.step()
+        this.timer.step()
     }
 }

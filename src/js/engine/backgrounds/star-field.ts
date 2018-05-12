@@ -4,7 +4,7 @@ export default class StarField extends Sprite {
     game:Game
     private speed:number
     private offset:number = 0
-    private numStars:number = 100
+    private numStars:number = 30
     private starfield:HTMLCanvasElement
     private transparentBackground:boolean
 

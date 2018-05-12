@@ -1,4 +1,5 @@
 import { Game } from './game'
+import { Timer } from './timer'
 // Event emitter?
 // Call every couple miller seconds function
 // this.callEvery(200, ()=>{})
@@ -13,6 +14,7 @@ export class Sprite {
     backgroundColor:string = 'rgba(0,0,0,0)'
     backgroundImage:string = ''
     private backgroundImageEl?:HTMLImageElement = null
+    protected timer:Timer
 
     get height(){
         return this._height
@@ -85,6 +87,8 @@ export class Sprite {
 
     public setup(game:Game){
         this.game = game
+        this.timer = new Timer(game)
+        // Is this suppose to be here?
         if(this.backgroundImage){
             this.backgroundImageEl = new Image()
             this.backgroundImageEl.src = this.backgroundImage
@@ -92,7 +96,7 @@ export class Sprite {
     }
 
     public step(){
-        // Implement in subclasses
+        this.timer.step()
     }
 
     public destroy(){

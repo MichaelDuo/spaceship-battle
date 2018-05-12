@@ -4,8 +4,6 @@ import PlayerImage from '../../img/player-ship.png'
 import Constants from "../constants"
 import constants from "../constants";
 export class Player extends Sprite {
-    game:Game
-
     tag = Constants.PLAYER
     speed = 0
     
@@ -22,7 +20,6 @@ export class Player extends Sprite {
 
     setup(game:Game){
         super.setup(game)
-        this.game = game
         this.top = this.game.world.height - this.height - 10
         this.left = (this.game.world.width/2) - (this.width / 2)
     }

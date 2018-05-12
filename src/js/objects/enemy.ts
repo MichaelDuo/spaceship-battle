@@ -1,5 +1,6 @@
 import { Sprite, Game, Utils, Position, Vector } from "../engine"
 import { Missle } from "./missle"
+import { Explosion } from "./explosion"
 import Constants from "../constants"
 export class Enemy extends Sprite {
    game:Game
@@ -31,6 +32,7 @@ export class Enemy extends Sprite {
     
     destroyed(){
         console.log("emeny destroyed")
+        this.game.world.addSprite(new Explosion(this.getPosition()))
     }
     
     step(){
