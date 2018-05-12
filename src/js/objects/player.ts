@@ -1,11 +1,11 @@
 import { Sprite, Game, Utils } from "../engine"
 import { Missle } from "./missle"
 import PlayerImage from '../../img/player-ship.png'
-
+import Constants from "../constants"
 export class Player extends Sprite {
     game:Game
 
-    tag = "player"
+    tag = Constants.PLAYER
     speed = 0
     
     top = 0
@@ -62,11 +62,11 @@ export class Player extends Sprite {
         if(gameTime-this.lastMissleLaunchTime>=this.missleTimeGap || !this.lastMissleLaunchTime){
             let leftPosition = this.getPosition()
             let missleLeft = new Missle(15, leftPosition, {x: 0, y: -1})
-            this.game.world.addObject(missleLeft)
+            this.game.world.addSprite(missleLeft)
 
             let rightPosition = Object.assign({}, leftPosition, { left: leftPosition.left + this.getWidth() })
             let missleRight = new Missle(15, rightPosition, {x: 0, y: -1})
-            this.game.world.addObject(missleRight)
+            this.game.world.addSprite(missleRight)
 
             this.lastMissleLaunchTime = gameTime
         }

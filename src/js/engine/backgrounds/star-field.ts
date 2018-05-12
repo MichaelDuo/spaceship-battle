@@ -1,11 +1,11 @@
 import { Sprite } from '../sprite'
 import { Game } from '../game'
 export default class StarField extends Sprite {    
+    game:Game
     private speed:number
     private offset:number = 0
     private numStars:number = 100
     private starfield:HTMLCanvasElement
-    private game:Game
     private transparentBackground:boolean
 
     constructor(speed:number, transparentBackground=false){
@@ -15,6 +15,7 @@ export default class StarField extends Sprite {
     }
 
     setup(game:Game){
+        super.setup(game)
         this.game = game
         let starfield = this.starfield = document.createElement("canvas")
         starfield.width = game.world.width

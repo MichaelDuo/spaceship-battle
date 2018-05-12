@@ -7,10 +7,10 @@ export class GameManager implements Manager {
     setup(game: Game){
         this.game = game
         let player = new Player(7)
-        this.game.world.addObject(player)
+        this.game.world.addSprite(player)
 
-        let enemy = new Enemy({top: 0, left: 0})
-        this.game.world.addObject(enemy)
+        let enemy = new Enemy({top: 0, left: Math.random() * this.game.world.width})
+        this.game.world.addSprite(enemy)
     }
 
     step(){

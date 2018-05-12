@@ -1,11 +1,12 @@
 import { Sprite, Game, Utils, Position, Vector } from "../engine"
 import { Missle } from "./missle"
+import Constants from "../constants"
 export class Enemy extends Sprite {
    game:Game
 
-   tag = "ememy"
-   speed:number = 10
-   vector:Vector = { x: 0, y: 1 }
+   tag = Constants.ENEMY
+   speed:number = 2
+   vector:Vector = { x: 1, y: 1 }
 
    top = 0
    left = 0
@@ -20,13 +21,18 @@ export class Enemy extends Sprite {
     }
 
     setup(game:Game){
+        super.setup(game)
         this.game = game
     }
 
-    destroy(){
+    hit(damage:number){
+        this.destroy()
+    }
+    
+    destroyed(){
         console.log("emeny destroyed")
     }
-
+    
     step(){
         this.left += this.vector.x * this.speed
         this.top += this.vector.y * this.speed

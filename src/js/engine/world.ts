@@ -9,7 +9,7 @@ export class World extends Sprite implements Manager {
     width:number
     height:number
 
-    private objects:Sprite[] = [ ]
+    private sprites:Sprite[] = [ ]
 
     constructor(canvasId?:string){
         super()
@@ -31,20 +31,20 @@ export class World extends Sprite implements Manager {
 
     public step(){
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
-        this.objects.forEach(obj=>{
+        this.sprites.forEach(obj=>{
             obj.step()
             obj.draw(this.ctx)
         })
     }
 
-    public addObject(object:Sprite){
-        this.objects.push(object)
-        object.setup(this.game)
+    public addSprite(sprite:Sprite){
+        this.sprites.push(sprite)
+        sprite.setup(this.game)
     }
 
-    public removeObject(object:Sprite){
-        this.objects.splice(this.objects.indexOf(object), 1)
-        object.destroy()
+    public removeObject(sprite:Sprite){
+        this.sprites.splice(this.sprites.indexOf(sprite), 1)
+        sprite.destroyed()
     }
 
     public inBound(rect: {top:number, left:number, width:number, height:number}){
@@ -54,9 +54,30 @@ export class World extends Sprite implements Manager {
             && rect.left <= this.getWidth()
     }
 
+    public collide(sprite:Sprite, targetTags:string[]):Sprite | undefined{
+        return this.sprites
+        .filter(sprite=>targetTags.indexOf(sprite.tag)>=0)
+        .find((target)=>{
+            return (
+                (sprite.left > target.left && sprite.right < target.right) &&
+                (
+                    (sprite.bottom > target.top && sprite.top < target.bottom) || 
+                    (sprite.top < target.bottom && sprite.bottom > target.top)
+                )
+            ) ||
+            (
+                (sprite.top > target.top && sprite.bottom < target.bottom) && 
+                (
+                    (sprite.left < target.right && sprite.right > target.left) ||
+                    (sprite.right > target.left && sprite.left < target.right)
+                )
+            )
+        })
+    }
+
     private createBackground(){
-        this.addObject(new StarField(1))
-        this.addObject(new StarField(2, true))
-        this.addObject(new StarField(3, true))
+        this.addSprite(new StarField(1))
+        this.addSprite(new StarField(2, true))
+        this.addSprite(new StarField(3, true))
     }
 }

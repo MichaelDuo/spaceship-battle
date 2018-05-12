@@ -1,7 +1,8 @@
 import { Sprite, Game, Utils, Vector } from "../engine"
-
+import Constants from "../constants"
+import { Enemy } from "./enemy"
 export class Missle extends Sprite {
-    tag = "missle"
+    tag = Constants.MISSLE
     speed = 30
     game:Game
 
@@ -21,6 +22,7 @@ export class Missle extends Sprite {
     }
 
     setup(game:Game){
+        super.setup(game)
         this.game = game
     }
 
@@ -30,7 +32,11 @@ export class Missle extends Sprite {
         if(!this.game.world.inBound(this.getBoundingRect())){
             this.game.world.removeObject(this)
         }
+        let collisionTarget = this.game.world.collide(this, [Constants.ENEMY])
+        if(collisionTarget instanceof Enemy){
+            collisionTarget.hit(2)
+        }
     }
 
-    destroy(){ }
+    destroyed(){ }
 }
