@@ -2,6 +2,7 @@ import { Sprite, Game, Utils } from "../engine"
 import { Missle } from "./missle"
 import PlayerImage from '../../img/player-ship.png'
 import Constants from "../constants"
+import constants from "../constants";
 export class Player extends Sprite {
     game:Game
 
@@ -55,17 +56,17 @@ export class Player extends Sprite {
         this.lauchMissle()
     }
 
-    private lastMissleLaunchTime:number
+    private lastMissleLaunchTime:number = -1
     private missleTimeGap = 200 //ms
     lauchMissle(){
         let gameTime = this.game.getGameTime()
-        if(gameTime-this.lastMissleLaunchTime>=this.missleTimeGap || !this.lastMissleLaunchTime){
+        if(gameTime-this.lastMissleLaunchTime>=this.missleTimeGap){
             let leftPosition = this.getPosition()
-            let missleLeft = new Missle(15, leftPosition, {x: 0, y: -1})
+            let missleLeft = new Missle(15, leftPosition, {x: 0, y: -1}, constants.ENEMY)
             this.game.world.addSprite(missleLeft)
 
             let rightPosition = Object.assign({}, leftPosition, { left: leftPosition.left + this.getWidth() })
-            let missleRight = new Missle(15, rightPosition, {x: 0, y: -1})
+            let missleRight = new Missle(15, rightPosition, {x: 0, y: -1}, constants.ENEMY)
             this.game.world.addSprite(missleRight)
 
             this.lastMissleLaunchTime = gameTime

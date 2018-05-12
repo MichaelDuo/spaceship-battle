@@ -3,12 +3,13 @@ import { Game } from './game'
 // Call every couple miller seconds function
 // this.callEvery(200, ()=>{})
 export class Sprite {
-    tag:string = ""
+    tag:string = "NONE"
     protected game:Game
     private _left:number = 0
     private _top:number = 0
     private _width:number = 0
     private _height:number = 0
+    rotation = 0
     backgroundColor:string = 'rgba(0,0,0,0)'
     backgroundImage:string = ''
     private backgroundImageEl?:HTMLImageElement = null
@@ -105,6 +106,7 @@ export class Sprite {
     public draw(ctx:CanvasRenderingContext2D){
         ctx.save()
         ctx.fillStyle = this.backgroundColor
+        ctx.rotate(this.rotation)
         ctx.fillRect(this.left, this.top, this.width, this.height)
         if(this.backgroundImageEl){
             ctx.drawImage(this.backgroundImageEl, this.left, this.top, this.width, this.height)

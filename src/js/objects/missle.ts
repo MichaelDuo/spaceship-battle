@@ -5,6 +5,7 @@ export class Missle extends Sprite {
     tag = Constants.MISSLE
     speed = 30
     game:Game
+    damage = 1
 
     top = 0
     left = 0
@@ -12,13 +13,15 @@ export class Missle extends Sprite {
     height = 15
     backgroundColor = "yellow"
     vector:Vector
+    target:string
 
-    constructor(speed:number, position:{top: number, left: number}, vector:Vector){
+    constructor(speed:number, position:{top: number, left: number}, vector:Vector, target:string){
         super()
         this.speed = speed
         this.top = position.top
         this.left = position.left - this.width/2
         this.vector = vector
+        this.target = target
     }
 
     setup(game:Game){
@@ -32,9 +35,10 @@ export class Missle extends Sprite {
         if(!this.game.world.inBound(this.getBoundingRect())){
             this.game.world.removeObject(this)
         }
-        let collisionTarget = this.game.world.collide(this, [Constants.ENEMY])
+        let collisionTarget = this.game.world.collide(this, [this.target])
         if(collisionTarget instanceof Enemy){
-            collisionTarget.hit(2)
+            this.destroy()
+            collisionTarget.hit(this.damage)
         }
     }
 

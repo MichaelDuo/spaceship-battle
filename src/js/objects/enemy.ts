@@ -6,7 +6,7 @@ export class Enemy extends Sprite {
 
    tag = Constants.ENEMY
    speed:number = 2
-   vector:Vector = { x: 1, y: 1 }
+   vector:Vector = { x: 0, y: 1 }
 
    top = 0
    left = 0

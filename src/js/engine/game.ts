@@ -2,29 +2,40 @@ import { World } from './world'
 import { Manager } from './interfaces'
 import { KeybordInputManager } from './keyboard-input-manager'
 import { Preloader, PreloaderOptions } from './preloader'
-export class Game {
+import { Eventemitter } from './event-emitter'
+export class Game extends Eventemitter {
     world:World
     keyboardInputManager:KeybordInputManager
 
     private managers:Manager[] = [ ]
-    private startTime:number
+    private startTime:number = 0
     private preloader = new Preloader()
     private preloaderOptions:PreloaderOptions
     private loadingAssets = false
+    private running = false
 
     constructor(world:World){
+        super()
         this.world = world
         this.addManager(world)
         this.keyboardInputManager = new KeybordInputManager()
     }
 
     public addManager(manager:Manager) {
-        manager.setup && manager.setup(this)
+        if(this.running){
+            manager.setup(this)
+        } else {
+            this.on("start", ()=>{
+                manager.setup(this)
+            })
+        }
         this.managers.push(manager)
     }
 
     public start(){
         this.startTime = Date.now()
+        this.running = true
+        this.emit("start")
         this.loop()
     }
 

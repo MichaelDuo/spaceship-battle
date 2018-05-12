@@ -43,7 +43,8 @@ export class World extends Sprite implements Manager {
     }
 
     public removeObject(sprite:Sprite){
-        this.sprites.splice(this.sprites.indexOf(sprite), 1)
+        // this.sprites.splice(this.sprites.indexOf(sprite), 1) // why this will cause flashing problem?
+        this.sprites = this.sprites.filter((s)=>s!==sprite)
         sprite.destroyed()
     }
 
