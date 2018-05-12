@@ -13,7 +13,7 @@ export class GameManager implements Manager {
         this.game.world.addSprite(player)
         this.timer = new Timer(game)
 
-        this.timer.setInterval(1000, ()=>{
+        this.timer.setInterval(200, ()=>{
             this.generateEnemy()
         })
     }
