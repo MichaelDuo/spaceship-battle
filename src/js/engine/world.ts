@@ -29,10 +29,10 @@ export class World extends Sprite implements Manager {
         $(canvas).attr({ width: this.width, height: this.height})
     }
 
-    public step(){
+    public step(dt:number){
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
         this.sprites.forEach(obj=>{
-            obj.step()
+            obj.step(dt)
             obj.draw(this.ctx)
         })
     }
@@ -77,8 +77,8 @@ export class World extends Sprite implements Manager {
     }
 
     private createBackground(){
-        this.addSprite(new StarField(1))
-        this.addSprite(new StarField(2, true))
-        this.addSprite(new StarField(3, true))
+        this.addSprite(new StarField(100))
+        this.addSprite(new StarField(150, true))
+        this.addSprite(new StarField(200, true))
     }
 }

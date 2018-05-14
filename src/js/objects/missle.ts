@@ -29,7 +29,7 @@ export class Missle extends Sprite {
         this.game = game
     }
 
-    step(){
+    step(dt:number){
         this.left += this.speed * this.vector.x
         this.top += this.speed * this.vector.y
         if(!this.game.world.inBound(this.getBoundingRect())){

@@ -95,8 +95,8 @@ export class Sprite {
         }
     }
 
-    public step(){
-        this.timer.step()
+    public step(dt:number){
+        this.timer.step(dt)
     }
 
     public destroy(){

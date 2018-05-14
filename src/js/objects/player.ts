@@ -22,13 +22,17 @@ export class Player extends Sprite {
         super.setup(game)
         this.top = this.game.world.height - this.height - 10
         this.left = (this.game.world.width/2) - (this.width / 2)
+        this.timer.setInterval(200, ()=>{
+            this.lauchMissle()
+        })
     }
 
-    step(){
+    step(dt:number){
+        super.step(dt)
         let direction = this.game.keyboardInputManager.getKeyName()
         let vector = Utils.getVector(direction)
-        this.left = this.left + vector.x * this.speed
-        this.top = this.top + vector.y * this.speed
+        this.left = this.left + vector.x * this.speed * dt
+        this.top = this.top + vector.y * this.speed * dt
 
         // Bounded option
         if(this.left < 0){
@@ -49,24 +53,15 @@ export class Player extends Sprite {
         if(this.top + playerHeight > worldHeight){
             this.top = worldHeight - playerHeight
         }
-
-        this.lauchMissle()
     }
-
-    private lastMissleLaunchTime:number = -1
-    private missleTimeGap = 200 //ms
+    
     lauchMissle(){
-        let gameTime = this.game.getGameTime()
-        if(gameTime-this.lastMissleLaunchTime>=this.missleTimeGap){
-            let leftPosition = this.getPosition()
-            let missleLeft = new Missle(15, leftPosition, {x: 0, y: -1}, constants.ENEMY)
-            this.game.world.addSprite(missleLeft)
+        let leftPosition = this.getPosition()
+        let missleLeft = new Missle(15, leftPosition, {x: 0, y: -1}, constants.ENEMY)
+        this.game.world.addSprite(missleLeft)
 
-            let rightPosition = Object.assign({}, leftPosition, { left: leftPosition.left + this.getWidth() })
-            let missleRight = new Missle(15, rightPosition, {x: 0, y: -1}, constants.ENEMY)
-            this.game.world.addSprite(missleRight)
-
-            this.lastMissleLaunchTime = gameTime
-        }
+        let rightPosition = Object.assign({}, leftPosition, { left: leftPosition.left + this.getWidth() })
+        let missleRight = new Missle(15, rightPosition, {x: 0, y: -1}, constants.ENEMY)
+        this.game.world.addSprite(missleRight)
     }
 }

@@ -6,7 +6,7 @@ export class Enemy extends Sprite {
    game:Game
 
    tag = Constants.ENEMY
-   speed:number = 2
+   speed:number = 100
    vector:Vector = { x: 0, y: 1 }
 
    top = 0
@@ -35,9 +35,9 @@ export class Enemy extends Sprite {
         this.game.world.addSprite(new Explosion(this.getPosition()))
     }
     
-    step(){
-        this.left += this.vector.x * this.speed
-        this.top += this.vector.y * this.speed
+    step(dt:number){
+        this.left += this.vector.x * this.speed * dt
+        this.top += this.vector.y * this.speed * dt
         if(!this.game.world.inBound(this.getBoundingRect())){
             this.game.world.removeObject(this)
         }

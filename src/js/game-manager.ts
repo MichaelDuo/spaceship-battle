@@ -9,7 +9,7 @@ export class GameManager implements Manager {
 
     setup(game: Game){
         this.game = game
-        let player = this.player = new Player(7)
+        let player = this.player = new Player(500)
         this.game.world.addSprite(player)
         this.timer = new Timer(game)
 
@@ -24,7 +24,7 @@ export class GameManager implements Manager {
         this.game.world.addSprite(enemy)
     }
 
-    step(){
-        this.timer.step()
+    step(dt?:number){
+        this.timer.step(dt)
     }
 }

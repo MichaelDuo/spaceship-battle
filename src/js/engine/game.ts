@@ -8,11 +8,12 @@ export class Game extends Eventemitter {
     keyboardInputManager:KeybordInputManager
 
     private managers:Manager[] = [ ]
-    private startTime:number = 0
     private preloader = new Preloader()
     private preloaderOptions:PreloaderOptions
     private loadingAssets = false
     private running = false
+    private lastTime = Date.now()
+    private maxTime = 1/30
 
     constructor(world:World){
         super()
@@ -33,14 +34,9 @@ export class Game extends Eventemitter {
     }
 
     public start(){
-        this.startTime = Date.now()
         this.running = true
         this.emit("start")
         this.loop()
-    }
-
-    public getGameTime():number{
-        return Date.now() - this.startTime
     }
 
     public async preload(options:PreloaderOptions){
@@ -51,16 +47,15 @@ export class Game extends Eventemitter {
     }
 
     private loop(){
-        window.requestAnimationFrame(()=>{
-            this.step()
-            this.loop()
-        })
+        window.requestAnimationFrame(()=>this.loop())
+        let currTime = Date.now()
+        let dt = Math.min((currTime - this.lastTime) / 1000, this.maxTime)
+        this.lastTime = currTime
+        this.step(dt)
     }
 
-    private step(){
-        if(this.loadingAssets){
-            return
-        }
-        this.managers.forEach(manager=>manager.step && manager.step())
+    private step(dt:number){
+        if(this.loadingAssets){ return }
+        this.managers.forEach(manager=>manager.step && manager.step(dt))
     }
 }

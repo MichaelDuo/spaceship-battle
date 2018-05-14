@@ -41,8 +41,8 @@ export default class StarField extends Sprite {
     }
 
 
-    step(){
-        this.offset += this.speed
+    step(dt:number){
+        this.offset += this.speed * dt
         if(this.offset>=this.game.world.height){
             this.offset = 1 // Safari will throw error if reset to 0
         }

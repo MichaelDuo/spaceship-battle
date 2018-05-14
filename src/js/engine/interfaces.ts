@@ -2,7 +2,7 @@ import { Game } from './game'
 
 export interface Manager {
     setup?: (game:Game)=>void
-    step: ()=>void
+    step: (dt:number)=>void
 }
 
 export interface Position {

@@ -8,7 +8,7 @@
 
  interface TimerObj {
     interval:number
-    lastTriggered:number
+    remainingTime:number
     handler:Function
  }
 
@@ -25,7 +25,7 @@
         this.timerObjs.push({
             interval,
             handler,
-            lastTriggered: this.game.getGameTime()
+            remainingTime: interval
         })
     }
 
@@ -37,7 +37,7 @@
         this.timerObjs.push({
             interval,
             handler: g,
-            lastTriggered: this.game.getGameTime()
+            remainingTime: interval
         })
     }
 
@@ -48,11 +48,13 @@
         }
     }
 
-    step(){
+    step(dt:number){
         for(let i of this.timerObjs){
-            if(this.game.getGameTime() - i.lastTriggered >= i.interval){
+            if(i.remainingTime <= 0){
                 i.handler()
-                i.lastTriggered = this.game.getGameTime()
+                i.remainingTime = i.interval
+            } else {
+                i.remainingTime -= dt * 1000 // s to ms
             }
         }
     }
